@@ -324,6 +324,39 @@
             text-decoration: underline;
         }
         
+        .admin-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .admin-btn {
+            display: inline-block;
+            background: #9c27b0;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn:hover {
+            background: #7b1fa2;
+            transform: translateY(-2px);
+        }
+        
+        .github-info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -412,6 +445,18 @@
             <div id="send-status"></div>
         </div>
         
+        <div class="admin-section">
+            <h3><i class="fas fa-lock"></i> Area Admin</h3>
+            <p>Fitur untuk mengelola data aspirasi</p>
+            <a href="#" class="admin-btn" onclick="viewData()"><i class="fas fa-database"></i> Lihat Data</a>
+            <a href="#" class="admin-btn" onclick="downloadData()"><i class="fas fa-download"></i> Unduh Data</a>
+            <a href="#" class="admin-btn" onclick="resetData()"><i class="fas fa-trash"></i> Reset Data</a>
+            
+            <div class="github-info">
+                <p><i class="fab fa-github"></i> Data disimpan di: <span id="data-location">Menghubungkan ke GitHub...</span></p>
+            </div>
+        </div>
+        
         <div class="info-box">
             <h3><i class="fas fa-info-circle"></i> Apa yang bisa dilaporkan?</h3>
             <ul>
@@ -451,7 +496,7 @@
         <div class="footer">
             <p>© 2025 OSIS/MPK SMA Negeri 1 Kepanjen</p>
             <div class="footer-links">
-                <a href="indexadmin.html">Login Admin</a>
+                <a href="admin.html">Login Admin</a>
                 <a href="#">Tentang Kami</a>
                 <a href="#">Kebijakan Privasi</a>
                 <a href="#">Kontak</a>
@@ -625,4 +670,5 @@
 </body>
 
 </html>
+
 
