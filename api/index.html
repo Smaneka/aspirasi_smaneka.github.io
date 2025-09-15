@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Aspirasi - OSIS/MPK SMA Negeri 1 Kepanjen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a5f7a, #159895);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .high-res-logo {
+            max-width: 100%;
+            height: auto;
+            max-height: 180px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .high-res-logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .osis-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            margin: 20px 0 30px 0;
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            font-weight: 500;
+            line-height: 1.5;
+            backdrop-filter: blur(5px);
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        input::placeholder, textarea::placeholder, select::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: #ff5722;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: #ff7043;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        #send-status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+        
+        .file-upload {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .file-upload-input {
+            display: none;
+        }
+        
+        .file-upload-label {
+            display: block;
+            padding: 15px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload-label:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .file-upload-label i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .preview-container {
+            display: none;
+            margin-top: 15px;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .remove-image {
+            background: rgba(244, 67, 54, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .remove-image:hover {
+            background: rgba(244, 67, 54, 0.3);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature i {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .info-box li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .info-box li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #ff5722;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 600px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .high-res-logo {
+                max-height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/LOGO_SMAN_1_KEPANJEN.png" alt="Logo SMA Negeri 1 Kepanjen" class="high-res-logo">
+            </div>
+            <h1>SMA Negeri 1 Kepanjen</h1>
+            <p>Website Aspirasi Resmi</p>
+            <div class="osis-badge">Dikelola oleh OSIS/MPK</div>
+        </div>
+        
+        <div class="tagline">Sampaikan aspirasi, saran, dan laporan Anda untuk kemajuan sekolah kita bersama</div>
+        
+        <div class="card">
+            <div class="input-group">
+                <label for="category">Kategori Laporan</label>
+                <select id="category">
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="event">Kekurangan/Saran Event Sekolah</option>
+                    <option value="facility">Kerusakan Fasilitas Sekolah</option>
+                    <option value="teaching">Proses Pembelajaran</option>
+                    <option value="extracurricular">Kegiatan Ekstrakurikuler</option>
+                    <option value="canteen">Kantin & Katering</option>
+                    <option value="suggestion">Saran untuk OSIS/MPK</option>
+                    <option value="other">Lainnya</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="message-text">Detail Laporan / Aspirasi</label>
+                <textarea placeholder="Jelaskan secara detail laporan, saran, atau aspirasi Anda..." id="message-text"></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="urgency">Tingkat Urgensi</label>
+                <select id="urgency">
+                    <option value="low">Biasa</option>
+                    <option value="medium">Penting</option>
+                    <option value="high">Sangat Penting</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Unggah Foto Bukti (Opsional)</label>
+                <div class="file-upload">
+                    <input type="file" id="file-input" class="file-upload-input" accept="image/*">
+                    <label for="file-input" class="file-upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Klik untuk mengunggah foto atau seret ke sini</span>
+                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">Maksimal 2MB</div>
+                    </label>
+                    <div class="preview-container" id="preview-container">
+                        <img src="" class="image-preview" id="image-preview">
+                        <button type="button" class="remove-image" onclick="removeImage()">Hapus Foto</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Kirim Laporan</button>
+            
+            <div id="send-status"></div>
+        </div>
+        
+        <div class="info-box">
+            <h3><i class="fas fa-info-circle"></i> Apa yang bisa dilaporkan?</h3>
+            <ul>
+                <li>Kekurangan dalam event sekolah yang sudah berlangsung</li>
+                <li>Saran untuk event sekolah yang akan datang</li>
+                <li>Kerusakan fasilitas sekolah (kursi, meja, AC, lampu, dll)</li>
+                <li>Kendala dalam proses pembelajaran</li>
+                <li>Masalah di kantin sekolah</li>
+                <li>Saran untuk kegiatan OSIS/MPK</li>
+                <li>Ide untuk pengembangan sekolah</li>
+            </ul>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-user-secret"></i>
+                <h3>100% Anonim</h3>
+                <p>Identitas Anda dirahasiakan</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <h3>Respon Cepat</h3>
+                <p>OSIS/MPK akan menindaklanjuti</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Aman</h3>
+                <p>Data Anda terlindungi</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Untuk Sekolah</h3>
+                <p>Wujudkan sekolah yang lebih baik</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 OSIS/MPK SMA Negeri 1 Kepanjen</p>
+            <div class="footer-links">
+                <a href="admin.html">Login Admin</a>
+                <a href="#">Tentang Kami</a>
+                <a href="#">Kebijakan Privasi</a>
+                <a href="#">Kontak</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simpan data pesan di localStorage browser
+        if (!localStorage.getItem('aspirasiSmaneka')) {
+            localStorage.setItem('aspirasiSmaneka', JSON.stringify([]));
+        }
+        
+        // Variabel untuk menyimpan gambar yang diupload
+        let uploadedImage = null;
+        
+        // Fungsi untuk menangani upload gambar
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Validasi ukuran file (maksimal 2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Ukuran file terlalu besar. Maksimal 2MB.');
+                    this.value = '';
+                    return;
+                }
+                
+                // Validasi tipe file (hanya gambar)
+                if (!file.type.match('image.*')) {
+                    alert('Hanya file gambar yang diizinkan.');
+                    this.value = '';
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewContainer = document.getElementById('preview-container');
+                    const imagePreview = document.getElementById('image-preview');
+                    
+                    imagePreview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    
+                    // Simpan gambar untuk dikirim
+                    uploadedImage = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Fungsi untuk menghapus gambar
+        function removeImage() {
+            const previewContainer = document.getElementById('preview-container');
+            const fileInput = document.getElementById('file-input');
+            
+            previewContainer.style.display = 'none';
+            fileInput.value = '';
+            uploadedImage = null;
+        }
+        
+        // Fungsi untuk mengirim pesan
+        function sendMessage() {
+            const category = document.getElementById('category').value;
+            const message = document.getElementById('message-text').value.trim();
+            const urgency = document.getElementById('urgency').value;
+            const statusDiv = document.getElementById('send-status');
+            
+            if (!category) {
+                statusDiv.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i> Silakan pilih kategori laporan
+                    </div>
+                `;
+                return;
+            }
+            
+            if (!message) {
+                statusDiv.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i> Silakan tulis detail laporan Anda
+                    </div>
+                `;
+                return;
+            }
+            
+            if (message.length < 10) {
+                statusDiv.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i> Mohon jelaskan laporan Anda lebih detail
+                    </div>
+                `;
+                return;
+            }
+            
+            if (message.length > 1000) {
+                statusDiv.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i> Laporan terlalu panjang. Maksimal 1000 karakter.
+                    </div>
+                `;
+                return;
+            }
+            
+            // Simpan pesan
+            const messages = JSON.parse(localStorage.getItem('aspirasiSmaneka'));
+            
+            messages.push({
+                id: Date.now(),
+                category: category,
+                text: message,
+                urgency: urgency,
+                image: uploadedImage, // Simpan gambar sebagai base64
+                timestamp: new Date().toISOString(),
+                status: 'baru'
+            });
+            
+            localStorage.setItem('aspirasiSmaneka', JSON.stringify(messages));
+            
+            // Tampilkan status berhasil
+            statusDiv.innerHTML = `
+                <div class="success">
+                    <i class="fas fa-check-circle"></i> Laporan Anda berhasil dikirim! OSIS/MPK akan menindaklanjuti segera.
+                </div>
+            `;
+            
+            // Reset form
+            document.getElementById('category').selectedIndex = 0;
+            document.getElementById('message-text').value = '';
+            document.getElementById('urgency').selectedIndex = 0;
+            removeImage(); // Hapus preview gambar
+            
+            // Hapus status setelah 5 detik
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+        
+        // Tambahkan drag and drop functionality
+        const fileUploadLabel = document.querySelector('.file-upload-label');
+        
+        fileUploadLabel.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#ff5722';
+            this.style.background = 'rgba(255, 255, 255, 0.1)';
+        });
+        
+        fileUploadLabel.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            this.style.background = 'transparent';
+        });
+        
+        fileUploadLabel.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            this.style.background = 'transparent';
+            
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                const fileInput = document.getElementById('file-input');
+                // Create a new FileList object (not directly possible, so we use DataTransfer)
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
+                
+                // Trigger change event
+                const event = new Event('change');
+                fileInput.dispatchEvent(event);
+            }
+        });
+    </script>
+</body>
+</html>
